@@ -1,11 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const dotnev = require("dotenv");
+const authRoutes = require("./routes/auth");
 
-const registrationRoute = require("./routes/auth/registration");
-const loginRoute = require("./routes/auth/login");
-
-dotnev.config();
+require("dotenv").config();
 
 const app = express();
 
@@ -16,8 +13,11 @@ mongoose
 
 app.use(express.json());
 
-app.use(registrationRoute);
-app.use(loginRoute);
+app.use("/api/auth", authRoutes);
+
+app.get("/", (req, res) => {
+  res.send("API is running...");
+});
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server is running on ${PORT}`));
