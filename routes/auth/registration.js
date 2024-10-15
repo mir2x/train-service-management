@@ -12,21 +12,18 @@ router.post("/api/auth/register", async (req, res) => {
     if (user) {
       return res
         .status(400)
-        .json({ msg: "An account already exists with the given Email" });
+        .json("An account already exists with the given Email");
     }
-
     const hashedPassword = await bcrypt.hash(password, 10);
-
     user = new User({
       name,
       email,
       password: hashedPassword,
     });
-
     await user.save();
     res.status(201).json(user);
-  } catch {
-    (error) => console.log(`User registration failed : ${error.message}`);
+  } catch (error) {
+    console.error(`User registration failed : ${error.message}`);
     res.status(500).send("Server Error");
   }
 });
