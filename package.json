@@ -4,6 +4,7 @@
   "description": "A backend for managing train services",
   "main": "index.js",
   "scripts": {
+    "devStart": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,5 +23,15 @@
   "bugs": {
     "url": "https://github.com/mir2x/train-service-management/issues"
   },
-  "homepage": "https://github.com/mir2x/train-service-management#readme"
+  "homepage": "https://github.com/mir2x/train-service-management#readme",
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.7.1"
+  }
 }
