@@ -1,0 +1,26 @@
+{
+  "name": "train-service-management",
+  "version": "1.0.0",
+  "description": "A backend for managing train services",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mir2x/train-service-management.git"
+  },
+  "keywords": [
+    "train-service",
+    "backend",
+    "express",
+    "nodejs",
+    "mongodb"
+  ],
+  "author": "Mir Tanim Ahmed",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mir2x/train-service-management/issues"
+  },
+  "homepage": "https://github.com/mir2x/train-service-management#readme"
+}
