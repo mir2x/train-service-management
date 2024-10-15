@@ -14,11 +14,15 @@ router.post("/api/auth/register", async (req, res) => {
         .status(400)
         .json({ msg: "An account already exists with the given Email" });
     }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     user = new User({
       name,
       email,
-      password,
+      password: hashedPassword,
     });
+
     await user.save();
     res.status(201).json(user);
   } catch {
