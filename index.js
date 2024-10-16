@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const authRoutes = require("./routes/authRoutes");
 const stationRoutes = require("./routes/stationRoutes");
 const trainRoutes = require("./routes/trainRoutes");
+const walletRoutes = require("./routes/wallterRoutes");
 
 require("dotenv").config();
 
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/station", stationRoutes);
 app.use("/api/train", trainRoutes);
+app.use("/api/wallet", walletRoutes);
 
 app.get("/", (req, res) => {
   res.send("API is running...");
