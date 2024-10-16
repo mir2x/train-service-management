@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const authRoutes = require("./routes/auth");
+const stationRoutes = require("./routes/station");
 
 require("dotenv").config();
 
@@ -14,6 +15,7 @@ mongoose
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
+app.use("/api/station", stationRoutes);
 
 app.get("/", (req, res) => {
   res.send("API is running...");
