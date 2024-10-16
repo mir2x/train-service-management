@@ -4,6 +4,7 @@ const authRoutes = require("./routes/authRoutes");
 const stationRoutes = require("./routes/stationRoutes");
 const trainRoutes = require("./routes/trainRoutes");
 const walletRoutes = require("./routes/wallterRoutes");
+const ticketRoutes = require("./routes/ticketRoutes");
 
 require("dotenv").config();
 
@@ -20,6 +21,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/station", stationRoutes);
 app.use("/api/train", trainRoutes);
 app.use("/api/wallet", walletRoutes);
+app.use("/api/ticket", ticketRoutes);
 
 app.get("/", (req, res) => {
   res.send("API is running...");
