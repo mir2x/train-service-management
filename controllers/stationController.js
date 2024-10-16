@@ -20,6 +20,19 @@ const getStations = async (req, res) => {
   }
 };
 
+const getStationById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const station = await Station.findByIdAndDelete(id);
+    if (!station) {
+      return res.status(404).json({ message: "Station not found" });
+    }
+    res.status(200).json(station);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 const updateStation = async (req, res) => {
   try {
     const { id } = req.params;
@@ -57,4 +70,10 @@ const deleteStation = async (req, res) => {
   }
 };
 
-module.exports = { createStation, getStations, updateStation, deleteStation };
+module.exports = {
+  createStation,
+  getStations,
+  getStationById,
+  updateStation,
+  deleteStation,
+};
