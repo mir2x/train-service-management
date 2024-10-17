@@ -22,7 +22,7 @@ This project is a backend system for managing train services, stations, user wal
 
 Make sure you have the following installed on your machine:
 
-- [Node.js](https://nodejs.org/en/) (v14.x or later)
+- [Node.js](https://nodejs.org/en/)
 
 - [MongoDB](https://www.mongodb.com/)
 
