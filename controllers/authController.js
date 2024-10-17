@@ -2,6 +2,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const Joi = require("joi");
 const User = require("../models/User");
+const Ticket = require("../models/Ticket");
 const Wallet = require("../models/Wallet");
 require("dotenv").config();
 
@@ -104,6 +105,7 @@ const getUserProfile = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
     const wallet = await Wallet.findOne({ user: req.user.id });
+    const ticket = await Ticket.find({ user: req.user.id });
     res.status(200).json({
       _id: user._id,
       name: user.name,
@@ -114,6 +116,7 @@ const getUserProfile = async (req, res) => {
             transactions: wallet.transactions,
           }
         : { balance: 0, transactions: [] },
+      ticket,
     });
   } catch (error) {
     res.status(500).json({ message: error.message });

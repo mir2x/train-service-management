@@ -4,9 +4,10 @@ const Train = require("../models/Train");
 const Ticket = require("../models/Ticket");
 
 const purchaseTicket = async (req, res) => {
+  const userId = req.user.id;
+  const { trainId, startStation, endStation, method } = req.body;
+
   try {
-    const userId = req.user.id;
-    const { trainId, startStation, endStation, method } = req.body;
     const user = await User.findById(userId);
     const wallet = await Wallet.findOne({ user: user._id });
 
@@ -24,7 +25,7 @@ const purchaseTicket = async (req, res) => {
     );
 
     if (startIndex === -1 || endIndex === -1 || startIndex >= endIndex) {
-      return res.status(400).json({ error: "Invalid stations" });
+      return res.status(400).json({ error: "Invalid Routes" });
     }
 
     let totalFare = 0;
@@ -60,9 +61,8 @@ const purchaseTicket = async (req, res) => {
       balance: wallet.balance,
       totalFare,
     });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Error purchasing ticket" });
+  } catch (error) {
+    res.status(500).json({ error: `Error purchasing ticket: ${error}` });
   }
 };
 

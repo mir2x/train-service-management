@@ -1,9 +1,9 @@
 const Train = require("../models/Train");
 
 const createTrain = async (req, res) => {
+  const { name, stops } = req.body;
+  const train = new Train({ name, stops });
   try {
-    const { name, stops } = req.body;
-    const train = new Train({ name, stops });
     await train.save();
     res.status(201).json(train);
   } catch (error) {
@@ -21,8 +21,8 @@ const getTrains = async (req, res) => {
 };
 
 const getTrainById = async (req, res) => {
+  const { id } = req.params;
   try {
-    const { id } = req.params;
     const train = await Train.findById(id).populate("stops.station");
     if (!train) {
       return res.status(404).json({ message: "Train not found" });
