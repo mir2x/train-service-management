@@ -1,5 +1,5 @@
 const express = require("express");
-
+const mongoose = require("mongoose");
 const authRoutes = require("./routes/authRoutes");
 const stationRoutes = require("./routes/stationRoutes");
 const trainRoutes = require("./routes/trainRoutes");
@@ -7,12 +7,14 @@ const walletRoutes = require("./routes/walletRoutes");
 const ticketRoutes = require("./routes/ticketRoutes");
 const departureNotifier = require("./utils/departureNotifier");
 const removeExpiredTicket = require("./utils/removeExpiredTicket");
-const connectDB = require("./utils/db");
 require("dotenv").config();
 
 const app = express();
 
-connectDB;
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => console.log("Successfully contected to database"))
+  .catch((error) => console.log(`Couldn't connect to database : ${error}`));
 
 app.use(express.json());
 
