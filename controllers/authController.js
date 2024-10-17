@@ -9,7 +9,7 @@ require("dotenv").config();
 const registerSchema = Joi.object({
   name: Joi.string().min(3).max(30).required(),
   email: Joi.string().email().required(),
-  password: Joi.string().min(6).required(),
+  password: Joi.string().min(8).required(),
 });
 
 const loginSchema = Joi.object({
@@ -18,7 +18,7 @@ const loginSchema = Joi.object({
 });
 
 const generateToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "6h" });
+  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "2h" });
 };
 
 const createNewUser = async (name, email, password, role = "user") => {
