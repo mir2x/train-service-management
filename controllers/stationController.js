@@ -23,7 +23,7 @@ const getStations = async (req, res) => {
 const getStationById = async (req, res) => {
   try {
     const { id } = req.params;
-    const station = await Station.findByIdAndDelete(id);
+    const station = await Station.findById(id);
     if (!station) {
       return res.status(404).json({ message: "Station not found" });
     }

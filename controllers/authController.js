@@ -1,11 +1,23 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const Joi = require("joi");
 const User = require("../models/User");
 const Wallet = require("../models/Wallet");
 require("dotenv").config();
 
+const registerSchema = Joi.object({
+  name: Joi.string().min(3).max(30).required(),
+  email: Joi.string().email().required(),
+  password: Joi.string().min(6).required(),
+});
+
+const loginSchema = Joi.object({
+  email: Joi.string().email().required(),
+  password: Joi.string().min(6).required(),
+});
+
 const generateToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "1h" });
+  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "6h" });
 };
 
 const createNewUser = async (name, email, password, role = "user") => {
@@ -25,6 +37,10 @@ const createNewUser = async (name, email, password, role = "user") => {
 
 const registerUser = async (req, res) => {
   const { name, email, password } = req.body;
+  const { error } = registerSchema.validate({ name, email, password });
+  if (error) {
+    return res.status(400).json({ message: error.details[0].message });
+  }
   try {
     const user = await createNewUser(name, email, password);
     res.status(201).json({
@@ -40,6 +56,10 @@ const registerUser = async (req, res) => {
 
 const createAdmin = async (req, res) => {
   const { name, email, password } = req.body;
+  const { error } = registerSchema.validate({ name, email, password });
+  if (error) {
+    return res.status(400).json({ message: error.details[0].message });
+  }
   try {
     const adminUser = await createNewUser(name, email, password, "admin");
     res.status(201).json({
@@ -55,6 +75,10 @@ const createAdmin = async (req, res) => {
 
 const loginUser = async (req, res) => {
   const { email, password } = req.body;
+  const { error } = loginSchema.validate({ email, password });
+  if (error) {
+    return res.status(400).json({ message: error.details[0].message });
+  }
   try {
     const user = await User.findOne({ email });
 

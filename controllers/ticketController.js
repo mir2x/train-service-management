@@ -6,7 +6,7 @@ const Ticket = require("../models/Ticket");
 const purchaseTicket = async (req, res) => {
   try {
     const userId = req.user.id;
-    const { trainId, startStation, endStation } = req.body;
+    const { trainId, startStation, endStation, method } = req.body;
     const user = await User.findById(userId);
     const wallet = await Wallet.findOne({ user: user._id });
 
@@ -38,7 +38,7 @@ const purchaseTicket = async (req, res) => {
 
     wallet.balance -= totalFare;
     wallet.transactions.push({
-      type: "debit",
+      method: method,
       amount: totalFare,
       description: `Ticket purchase from ${train.stops[startIndex].station.name} to ${train.stops[endIndex].station.name}`,
     });

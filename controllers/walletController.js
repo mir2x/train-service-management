@@ -1,7 +1,7 @@
 const Wallet = require("../models/Wallet");
 
 const addFunds = async (req, res) => {
-  const { amount, description } = req.body;
+  const { method, amount, description } = req.body;
   if (amount <= 0) {
     return res.status(400).json({ message: "Invalid amount" });
   }
@@ -16,7 +16,7 @@ const addFunds = async (req, res) => {
     }
     wallet.balance += amount;
     const newTransaction = {
-      type: "credit",
+      method: method,
       amount,
       description: description || "Funds added",
     };
