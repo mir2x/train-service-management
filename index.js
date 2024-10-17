@@ -5,6 +5,7 @@ const stationRoutes = require("./routes/stationRoutes");
 const trainRoutes = require("./routes/trainRoutes");
 const walletRoutes = require("./routes/walletRoutes");
 const ticketRoutes = require("./routes/ticketRoutes");
+const departureNotifier = require("./utils/departureNotifier");
 
 require("dotenv").config();
 
@@ -29,3 +30,5 @@ app.get("/", (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server is running on ${PORT}`));
+
+departureNotifier;
