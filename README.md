@@ -62,37 +62,3 @@ PORT=3000
 ```bash
 npm start
 ```
-
-### 5. Testing the APIs
-
-Use [Postman](https://www.postman.com/) or any API testing tool to interact with the following endpoints:
-
-#### User Management
-
-- **POST /auth/register**: Register a new user.
-- **POST /auth/login**: Log in and receive a JWT token.
-
-#### Station Management
-
-- **POST /stations**: Create a new station.
-- **GET /stations**: Get a list of all stations.
-
-#### Train Management
-
-- **POST /trains**: Create a new train with stops.
-- **GET /trains**: Get a list of all trains.
-
-#### Wallet Management
-
-- **POST /wallet/add-funds**: Add funds to the user's wallet.
-- **GET /wallet**: Get wallet balance and transaction history.
-
-#### Ticketing System
-
-- **POST /tickets/purchase**: Purchase a ticket using wallet balance.
-- **GET /tickets**: Get a list of purchased tickets.
-
-#### Cron Jobs
-
-- **Notification**: Users are notified one hour before their train departs.
-- **Ticket Expiration**: Tickets are automatically removed after the train departure time.
