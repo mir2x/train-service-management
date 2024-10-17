@@ -5,4 +5,5 @@ const stationSchema = new mongoose.Schema({
   location: { type: String, unique: true, required: true },
 });
 
-module.exports = mongoose.model("Station", stationSchema);
+const Station = mongoose.model("Station", stationSchema);
+module.exports = Station;

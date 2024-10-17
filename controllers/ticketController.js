@@ -1,11 +1,13 @@
 const User = require("../models/User");
 const Wallet = require("../models/Wallet");
 const Train = require("../models/Train");
+const Ticket = require("../models/Ticket");
 
 const purchaseTicket = async (req, res) => {
   try {
+    const userId = req.user.id;
     const { trainId, startStation, endStation } = req.body;
-    const user = await User.findById(req.user.id);
+    const user = await User.findById(userId);
     const wallet = await Wallet.findOne({ user: user._id });
 
     if (!wallet) {
@@ -43,8 +45,18 @@ const purchaseTicket = async (req, res) => {
 
     await wallet.save();
 
+    const ticket = new Ticket({
+      user: userId,
+      train: trainId,
+      startStation: train.stops[startIndex].station._id,
+      endStation: train.stops[endIndex].station._id,
+      departureTime: train.stops[startIndex].time,
+    });
+    await ticket.save();
+
     res.status(200).json({
       message: "Ticket purchased successfully",
+      ticket,
       balance: wallet.balance,
       totalFare,
     });
